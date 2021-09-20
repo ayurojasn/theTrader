@@ -1,8 +1,24 @@
 package com.project.theTrader.crew;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.theTrader.player.Player;
+import com.project.theTrader.product.Product;
+import com.project.theTrader.productCrew.ProductCrew;
+import com.project.theTrader.spacecraft.Spacecraft;
 
 @Entity
 public class Crew {
@@ -12,7 +28,19 @@ public class Crew {
     private Long id;
     private String crewName;
     private double credits;
-    private Integer totalTime;
+    private Integer totalTime; // Minutes
+
+    @OneToOne
+    @JoinColumn(name = "spacescraft", referencedColumnName = "id")
+    private Spacecraft spacecraft = new Spacecraft();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crew")
+    @JsonBackReference(value = "productPlanet")
+    private List<Player> playerList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crew")
+    @JsonBackReference(value = "productCrew")
+    private List<ProductCrew> productCrewList = new ArrayList<>();
     
     public Crew() {
     }
@@ -54,7 +82,33 @@ public class Crew {
     public void setTotalTime(Integer totalTime) {
         this.totalTime = totalTime;
     }
- 
+
+    public Spacecraft getSpacecraft() {
+        return this.spacecraft;
+    }
+
+    public void setSpacecraft(Spacecraft spacecraft) {
+        this.spacecraft = spacecraft;
+        this.spacecraft.setCrew(this); // Add crew to spacecraft
+    }
+
+    public List<Player> getPlayerList() {
+        return this.playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+
+    // public ArrayList<Product> getProductList() {
+    //     return this.productList;
+    // }
+
+    // public void setProductList(ArrayList<Product> productList) {
+    //     this.productList = productList;
+    // }
+
 
     @Override
     public String toString() {
@@ -64,6 +118,19 @@ public class Crew {
             ", credits='" + getCredits() + "'" +
             ", totalTime='" + getTotalTime() + "'" +
             "}";
+    }
+
+    // Add Player in Crew -> List of players in Crew
+    public void addPlayer(Player player) {
+            playerList.add(player);
+            player.setCrew(this);
+    
+    }
+
+    public void addProduct(Product product) {
+        ProductCrew productC = new ProductCrew(product, this);
+        productCrewList.add(productC);
+        product.getProductsCrew().add(productC);
     }
 
     

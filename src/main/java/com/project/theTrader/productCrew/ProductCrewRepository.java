@@ -1,9 +1,9 @@
-package com.project.theTrader.universe;
+package com.project.theTrader.productCrew;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UniverseRepository extends CrudRepository<Universe, Long> {
+public interface ProductCrewRepository extends CrudRepository<ProductCrew, Long>{
     
 }

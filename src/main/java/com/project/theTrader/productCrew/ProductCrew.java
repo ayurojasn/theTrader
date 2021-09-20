@@ -1,31 +1,33 @@
-package com.project.theTrader.player;
+package com.project.theTrader.productCrew;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.project.theTrader.crew.Crew;
+import com.project.theTrader.product.Product;
 
 @Entity
-public class Player {
+public class ProductCrew {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String playerName;
-    private String role;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Crew crew;
 
-
-    public Player() {
+    public ProductCrew() {
     }
 
-    public Player(String playerName, String role) {
-        this.playerName = playerName;
-        this.role = role;
+    public ProductCrew(Product product, Crew crew) {
+        this.product = product;
+        this.crew = crew;
     }
 
     public Long getId() {
@@ -36,22 +38,14 @@ public class Player {
         this.id = id;
     }
 
-    public String getPlayerName() {
-        return this.playerName;
+    public Product getProduct() {
+        return this.product;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getRole() {
-        return this.role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-    
     public Crew getCrew() {
         return this.crew;
     }
@@ -59,16 +53,15 @@ public class Player {
     public void setCrew(Crew crew) {
         this.crew = crew;
     }
-  
+
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", playerName='" + getPlayerName() + "'" +
-            ", role='" + getRole() + "'" +
+            ", product='" + getProduct() + "'" +
+            ", crew='" + getCrew() + "'" +
             "}";
     }
 
-
-
 }
+

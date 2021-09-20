@@ -2,17 +2,15 @@ package com.project.theTrader.universe;
 
 import java.util.ArrayList;
 
-import javax.persistence.Entity;
-
 import com.project.theTrader.star.Star;
 
-@Entity
 public class Universe {
-    // No necesita id, es sólo 1 universo. 
-
-    private ArrayList<Star> universe; 
+   
+    
+    private long Id;
+    private ArrayList<Star> universe = new ArrayList<>(); 
     // Dentro de Star, lista de Planetas "ArrayList<Star> -> Star -> ArrayList<Planeta>"
-    private ArrayList<ArrayList<Integer>> adjancyList; 
+    private ArrayList<ArrayList<Integer>> adjancyList;
     // La infromación del grafo conectado
 
     private int nodes;
@@ -28,6 +26,16 @@ public class Universe {
         this.nodes = nodes;
         this.edges = edges;
     }
+
+
+    public long getId() {
+        return this.Id;
+    }
+
+    public void setId(long Id) {
+        this.Id = Id;
+    }
+
 
     public ArrayList<Star> getUniverse() {
         return this.universe;

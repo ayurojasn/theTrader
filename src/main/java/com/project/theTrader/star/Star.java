@@ -1,8 +1,15 @@
 package com.project.theTrader.star;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.theTrader.planet.Planet;
 
 @Entity
 public class Star {
@@ -16,6 +23,9 @@ public class Star {
     private Integer z;
     private boolean inhabited;
 
+    @OneToMany(mappedBy = "star")
+    @JsonManagedReference(value = "star-planet")
+    private List<Planet> planetList = new ArrayList<>();
 
     public Star() {
     }
@@ -80,16 +90,36 @@ public class Star {
         this.inhabited = inhabited;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", starName='" + getStarName() + "'" +
-            ", x='" + getX() + "'" +
-            ", y='" + getY() + "'" +
-            ", z='" + getZ() + "'" +
-            ", inhabited='" + isInhabited() + "'" +
-            "}";
+
+    // public List<Planet> getPlanetList() {
+    //     return this.planetList;
+    // }
+
+    // public void setPlanetList(List<Planet> planetList) {
+    //     this.planetList = planetList;
+    // }
+
+
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //         " id='" + getId() + "'" +
+    //         ", starName='" + getStarName() + "'" +
+    //         ", x='" + getX() + "'" +
+    //         ", y='" + getY() + "'" +
+    //         ", z='" + getZ() + "'" +
+    //         ", inhabited='" + isInhabited() + "'" +
+    //         "}";
+    // }
+
+    // // Add Planet in planetList in Star -> Planets in Star
+    public boolean addPlanet(Planet planet) {
+        if(!planetList.contains(planet)){
+            planetList.add(planet);
+            planet.setStar(this);
+            return true;
+        }
+            return false;
     }
 
     

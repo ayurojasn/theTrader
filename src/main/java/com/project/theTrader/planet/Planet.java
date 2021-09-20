@@ -1,8 +1,22 @@
 package com.project.theTrader.planet;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.theTrader.product.Product;
+import com.project.theTrader.productPlanet.ProductPlanet;
+import com.project.theTrader.star.Star;
 
 @Entity
 public class Planet {
@@ -11,6 +25,14 @@ public class Planet {
     @GeneratedValue
     private Long id;
     private String planetName;
+
+    @ManyToOne
+    private Star star;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "planet")
+    @JsonManagedReference(value = "planet-product")
+    private List<ProductPlanet> productPlanetList = new ArrayList<>();
+
 
 
     public Planet() {
@@ -36,6 +58,21 @@ public class Planet {
         this.planetName = planetName;
     }
 
+    public Star getStar() {
+        return star;
+    }
+
+    public void setStar(Star star) {
+        this.star = star;
+    }
+
+    public List<ProductPlanet> getProductList() {
+        return this.productPlanetList;
+    }
+
+    public void setProductList(List<ProductPlanet> productPlanetList) {
+        this.productPlanetList = productPlanetList;
+    }
 
     @Override
     public String toString() {
@@ -45,5 +82,12 @@ public class Planet {
             "}";
     }
 
-    
+    //Add product in productlist in Planet -> Products in Planet
+
+    public void addProduct(Product product) {
+        ProductPlanet productP = new ProductPlanet(product, this);
+        productPlanetList.add(productP);
+        product.getProductsPlanet().add(productP);
+    }
+
 }

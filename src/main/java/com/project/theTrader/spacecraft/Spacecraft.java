@@ -3,6 +3,12 @@ package com.project.theTrader.spacecraft;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.project.theTrader.crew.Crew;
+import com.project.theTrader.star.Star;
 
 @Entity
 public class Spacecraft {
@@ -14,6 +20,13 @@ public class Spacecraft {
     private double cargo;
     private double speed;
 
+    @OneToOne
+    @JsonBackReference
+    private Crew crew;
+    
+
+    @ManyToOne
+    private Star star;
 
     public Spacecraft() {
     }
@@ -54,6 +67,23 @@ public class Spacecraft {
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public Crew getCrew() {
+        return this.crew;
+    }
+
+    public void setCrew(Crew crew) {
+        this.crew = crew;
+    }
+
+    
+    public Star getStar() {
+        return this.star;
+    }
+
+    public void setStar(Star star) {
+        this.star = star;
     }
 
     @Override

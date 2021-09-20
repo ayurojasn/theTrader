@@ -1,8 +1,23 @@
 package com.project.theTrader.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.theTrader.planet.Planet;
+import com.project.theTrader.productCrew.ProductCrew;
+import com.project.theTrader.productPlanet.ProductPlanet;
 
 @Entity
 public class Product {
@@ -19,6 +34,14 @@ public class Product {
     private boolean b_pv;
     private double pc;
     private boolean b_pc;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonBackReference(value = "productPlanet")
+    private List<ProductPlanet> productsPlanet = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnore
+    private List<ProductCrew> productsCrew = new ArrayList<>();
 
 
     public Product() {
@@ -123,6 +146,24 @@ public class Product {
     public void setB_pc(boolean b_pc) {
         this.b_pc = b_pc;
     }
+
+
+    public List<ProductPlanet> getProductsPlanet() {
+        return this.productsPlanet;
+    }
+
+    public void setProductsPlanet(List<ProductPlanet> productsPlanet) {
+        this.productsPlanet = productsPlanet;
+    }
+
+
+    public List<ProductCrew> getProductsCrew() {
+        return this.productsCrew;
+    }
+
+    public void setProductsCrew(List<ProductCrew> productsCrew) {
+        this.productsCrew = productsCrew;
+    }
  
     @Override
     public String toString() {
@@ -139,6 +180,7 @@ public class Product {
             ", b_pc='" + isB_pc() + "'" +
             "}";
     }
+
 
 
 }
