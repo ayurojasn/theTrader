@@ -3,13 +3,16 @@ package com.project.theTrader.star;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.theTrader.planet.Planet;
+import com.project.theTrader.spacecraft.Spacecraft;
 
 @Entity
 public class Star {
@@ -24,8 +27,12 @@ public class Star {
     private boolean inhabited;
 
     @OneToMany(mappedBy = "star")
-    @JsonManagedReference(value = "star-planet")
+    @JsonManagedReference(value = "planetStar")
     private List<Planet> planetList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "star")
+    @JsonManagedReference(value = "spacecraft")
+    private List<Spacecraft> spaceStarList = new ArrayList<>();
 
     public Star() {
     }
@@ -91,6 +98,23 @@ public class Star {
     }
 
 
+    public List<Planet> getPlanetList() {
+        return this.planetList;
+    }
+
+    public void setPlanetList(List<Planet> planetList) {
+        this.planetList = planetList;
+    }
+
+    public List<Spacecraft> getSpaceStarList() {
+        return this.spaceStarList;
+    }
+
+    public void setSpaceStarList(List<Spacecraft> spaceStarList) {
+        this.spaceStarList = spaceStarList;
+    }
+
+
     // public List<Planet> getPlanetList() {
     //     return this.planetList;
     // }
@@ -120,6 +144,13 @@ public class Star {
             return true;
         }
             return false;
+    }
+
+    public void addSpacecraft(Spacecraft craft) {
+        if (!spaceStarList.contains(craft)) {
+            spaceStarList.add(craft);
+            craft.setStar(this);
+        }
     }
 
     

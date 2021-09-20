@@ -98,6 +98,9 @@ public class Databaseinit implements ApplicationRunner{
         star1.addPlanet(planet2);
         star2.addPlanet(planet3);
 
+        star1.addSpacecraft(craft1);
+        star2.addSpacecraft(craft2);
+
         // Add each Product in Planet
         planet1.addProduct(product1); //Droide1-5
         planet1.addProduct(product2); //Droide2-5
@@ -107,7 +110,7 @@ public class Databaseinit implements ApplicationRunner{
         // Add each player in crew
         crew1.addPlayer(p1);
         crew1.addPlayer(p2);
-        crew2.addPlayer(p3);    
+        crew2.addPlayer(p3); 
 
         // Set spacecraft in crew
         crew1.setSpacecraft(craft1);
@@ -135,6 +138,7 @@ public class Databaseinit implements ApplicationRunner{
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
+
 
 
 

@@ -20,12 +20,13 @@ public class Spacecraft {
     private double cargo;
     private double speed;
 
-    @OneToOne
+    @OneToOne(mappedBy = "spacecraft")
     @JsonBackReference
     private Crew crew;
     
 
     @ManyToOne
+    @JsonBackReference(value = "spacecraft")
     private Star star;
 
     public Spacecraft() {

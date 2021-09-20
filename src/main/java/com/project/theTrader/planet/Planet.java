@@ -5,15 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.theTrader.product.Product;
 import com.project.theTrader.productPlanet.ProductPlanet;
 import com.project.theTrader.star.Star;
@@ -26,11 +25,12 @@ public class Planet {
     private Long id;
     private String planetName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference(value = "planetStar")
     private Star star;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "planet")
-    @JsonManagedReference(value = "planet-product")
+    @JsonManagedReference(value = "productPlanet")
     private List<ProductPlanet> productPlanetList = new ArrayList<>();
 
 

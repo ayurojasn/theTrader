@@ -11,4 +11,22 @@ public class MainController {
     public String getMainPage(Model model) {
         return "home";
     }
+
+    // Add only views to reference 
+
+    // @GetMapping("/player")
+    // public String getPlayerPage() {
+    //     return "player";
+    // }
+
+    @GetMapping("/crew")
+    public String getCrewPage() {
+        return "crew";
+    }
+
+    @GetMapping("/spacecraft")
+    public String getSpacecraftPage() {
+        return "spacecraft";
+    }
 }
+

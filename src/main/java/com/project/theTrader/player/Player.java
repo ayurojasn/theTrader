@@ -5,9 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.theTrader.crew.Crew;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 public class Player {
 
     @Id
@@ -16,9 +19,9 @@ public class Player {
     private String playerName;
     private String role;
 
-    @ManyToOne
+    @ManyToOne  
+    @JsonIgnoreProperties(value = { "crewName", "credits", "totalTime", "spacecraft", "playerList", "productCrewList"})
     private Crew crew;
-
 
     public Player() {
     }

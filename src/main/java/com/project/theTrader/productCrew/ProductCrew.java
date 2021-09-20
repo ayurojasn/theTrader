@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.theTrader.crew.Crew;
 import com.project.theTrader.product.Product;
 
@@ -20,6 +21,7 @@ public class ProductCrew {
     private Product product;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Crew crew;
 
     public ProductCrew() {

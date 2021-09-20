@@ -13,8 +13,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.theTrader.player.Player;
 import com.project.theTrader.product.Product;
 import com.project.theTrader.productCrew.ProductCrew;
@@ -35,6 +33,7 @@ public class Crew {
     private Spacecraft spacecraft = new Spacecraft();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "crew")
+    @JsonIgnore
     @JsonBackReference(value = "productPlanet")
     private List<Player> playerList = new ArrayList<>();
 
