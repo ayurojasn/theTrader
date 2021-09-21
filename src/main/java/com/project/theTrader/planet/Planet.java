@@ -5,19 +5,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.theTrader.product.Product;
 import com.project.theTrader.productPlanet.ProductPlanet;
 import com.project.theTrader.star.Star;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Planet {
 
     @Id
@@ -25,14 +26,14 @@ public class Planet {
     private Long id;
     private String planetName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference(value = "planetStar")
-    private Star star;
+    @ManyToOne
+    // @JsonBackReference(value = "planetStar")
+    @JsonIgnoreProperties(value = { "starName","x", "y", "z", "inhabited", "planetList", "spaceStarList"})
+    private Star star;  
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "planet")
-    @JsonManagedReference(value = "productPlanet")
-    private List<ProductPlanet> productPlanetList = new ArrayList<>();
-
+    @JsonIgnore
+    public List<ProductPlanet> productPlanetList = new ArrayList<>();
 
 
     public Planet() {
@@ -87,7 +88,7 @@ public class Planet {
     public void addProduct(Product product) {
         ProductPlanet productP = new ProductPlanet(product, this);
         productPlanetList.add(productP);
-        product.getProductsPlanet().add(productP);
+        // product.getProductsPlanet().add(productP);
     }
 
 }

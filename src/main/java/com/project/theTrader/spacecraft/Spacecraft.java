@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.theTrader.crew.Crew;
 import com.project.theTrader.star.Star;
 
@@ -20,13 +22,13 @@ public class Spacecraft {
     private double cargo;
     private double speed;
 
-    @OneToOne(mappedBy = "spacecraft")
-    @JsonBackReference
+    @OneToOne
+    @JsonIgnore
     private Crew crew;
-    
 
     @ManyToOne
     @JsonBackReference(value = "spacecraft")
+    @JsonIgnoreProperties(value = { "starName","x", "y", "z", "inhabited", "planetList", "spaceStarList"})
     private Star star;
 
     public Spacecraft() {

@@ -29,13 +29,13 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    @PostMapping(value="/players", consumes={"application/json"}) // C
+    @PostMapping(value="/player", consumes={"application/json"}) // C
     private Long createPlayer(@RequestBody Player player) {
         playerService.create(player);
         return player.getId();
     }
 
-    @GetMapping("/player") // R -> All
+    @GetMapping("/players") // R -> All
     private List<Player> getAllPlayers() {
         return playerService.getAllPlayers();
     }
@@ -45,7 +45,7 @@ public class PlayerController {
         return playerService.getPlayerById(playerid);
     }
 
-    @PutMapping("/players") // U
+    @PutMapping("/player") // U
     private Player updatePlayer(@RequestBody Player player, Long playerid) {
         playerService.update(player, playerid);
         return player;

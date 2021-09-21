@@ -13,12 +13,15 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.theTrader.player.Player;
 import com.project.theTrader.product.Product;
 import com.project.theTrader.productCrew.ProductCrew;
 import com.project.theTrader.spacecraft.Spacecraft;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 public class Crew {
     
     @Id 
@@ -30,15 +33,15 @@ public class Crew {
 
     @OneToOne
     @JoinColumn(name = "spacescraft", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = { "craftName", "cargo", "totalTime", "speed", "playerList", "productCrewList"})
     private Spacecraft spacecraft = new Spacecraft();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "crew")
-    @JsonIgnore
-    @JsonBackReference(value = "productPlanet")
     private List<Player> playerList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "crew")
-    @JsonBackReference(value = "productCrew")
+    @JsonIgnore
+    @JsonManagedReference(value = "productCrew")
     private List<ProductCrew> productCrewList = new ArrayList<>();
     
     public Crew() {
@@ -129,7 +132,6 @@ public class Crew {
     public void addProduct(Product product) {
         ProductCrew productC = new ProductCrew(product, this);
         productCrewList.add(productC);
-        product.getProductsCrew().add(productC);
     }
 
     

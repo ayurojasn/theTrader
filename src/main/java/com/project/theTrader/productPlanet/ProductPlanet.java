@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.project.theTrader.product.Product;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.theTrader.planet.Planet;
 
 @Entity
@@ -21,7 +22,7 @@ public class ProductPlanet {
     private Product product;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference(value = "productPlanet")
+    @JsonBackReference("productPlanet")
     private Planet planet;
 
     public ProductPlanet() {

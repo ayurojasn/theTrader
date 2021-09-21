@@ -15,20 +15,14 @@ public class PlayerService {
     @Autowired
     PlayerRepository playerRepository;
 
-    public List<Player> getAllPlayers()   
-    {  
+    public List<Player> getAllPlayers(){  
     List<Player> players = new ArrayList<Player>();  
     playerRepository.findAll().forEach(player1 -> players.add(player1));  
     return players;  
     }
 
     public void create(Player player) {
-        Player playerNew = new Player();
-        playerNew.setId(player.getId());
-        playerNew.setPlayerName(player.getPlayerName());
-        playerNew.setRole(player.getRole());
-        playerNew.setCrew(player.getCrew());
-        playerRepository.save(playerNew);
+        playerRepository.save(player);
     }
 
     public Player getPlayerById(Long playerid) {
@@ -40,11 +34,6 @@ public class PlayerService {
     }
 
     public void update(Player player, Long playerid) {
-        Player playerNew = new Player();
-        playerNew.setId(player.getId());
-        playerNew.setPlayerName(player.getPlayerName());
-        playerNew.setRole(player.getRole());
-        playerNew.setCrew(player.getCrew());
-        playerRepository.save(playerNew);
+        playerRepository.save(player);
     }  
 }

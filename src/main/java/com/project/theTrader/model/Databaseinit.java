@@ -10,6 +10,10 @@ import com.project.theTrader.player.Player;
 import com.project.theTrader.player.PlayerRepository;
 import com.project.theTrader.product.Product;
 import com.project.theTrader.product.ProductRepository;
+import com.project.theTrader.productCrew.ProductCrew;
+import com.project.theTrader.productCrew.ProductCrewRepository;
+import com.project.theTrader.productPlanet.ProductPlanet;
+import com.project.theTrader.productPlanet.ProductPlanetRepository;
 import com.project.theTrader.spacecraft.Spacecraft;
 import com.project.theTrader.spacecraft.SpacecraftRepository;
 import com.project.theTrader.star.Star;
@@ -41,6 +45,11 @@ public class Databaseinit implements ApplicationRunner{
     @Autowired
     StarRepository starRepository;
 
+    @Autowired
+    ProductPlanetRepository productPlanetRepository;
+
+    @Autowired
+    ProductCrewRepository productCrewRepository;
 
     @Override
     @Transactional

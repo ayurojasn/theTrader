@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.theTrader.productCrew.ProductCrew;
 import com.project.theTrader.productPlanet.ProductPlanet;
 
@@ -29,15 +30,6 @@ public class Product {
     private boolean b_pv;
     private double pc;
     private boolean b_pc;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonBackReference(value = "productPlanet")
-    private List<ProductPlanet> productsPlanet = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonIgnore
-    private List<ProductCrew> productsCrew = new ArrayList<>();
-
 
     public Product() {
     }
@@ -143,22 +135,22 @@ public class Product {
     }
 
 
-    public List<ProductPlanet> getProductsPlanet() {
-        return this.productsPlanet;
-    }
+    // public List<ProductPlanet> getProductsPlanet() {
+    //     return this.productsPlanet;
+    // }
 
-    public void setProductsPlanet(List<ProductPlanet> productsPlanet) {
-        this.productsPlanet = productsPlanet;
-    }
+    // public void setProductsPlanet(List<ProductPlanet> productsPlanet) {
+    //     this.productsPlanet = productsPlanet;
+    // }
 
 
-    public List<ProductCrew> getProductsCrew() {
-        return this.productsCrew;
-    }
+    // public List<ProductCrew> getProductsCrew() {
+    //     return this.productsCrew;
+    // }
 
-    public void setProductsCrew(List<ProductCrew> productsCrew) {
-        this.productsCrew = productsCrew;
-    }
+    // public void setProductsCrew(List<ProductCrew> productsCrew) {
+    //     this.productsCrew = productsCrew;
+    // }
  
     @Override
     public String toString() {
