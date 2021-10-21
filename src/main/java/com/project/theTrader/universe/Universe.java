@@ -2,15 +2,21 @@ package com.project.theTrader.universe;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.project.theTrader.star.Star;
 
+@Entity
 public class Universe {
    
-    
-    private long Id;
+    @Id
+    @GeneratedValue
+    private long id;
     private ArrayList<Star> universe = new ArrayList<>(); 
     // Dentro de Star, lista de Planetas "ArrayList<Star> -> Star -> ArrayList<Planeta>"
-    private ArrayList<ArrayList<Integer>> adjancyList;
+    private ArrayList<ArrayList<Star>> adjancyList;
     // La infromación del grafo conectado
 
     private int nodes;
@@ -20,7 +26,7 @@ public class Universe {
     public Universe() {
     }
 
-    public Universe(ArrayList<Star> universe, ArrayList<ArrayList<Integer>> adjancyList, int nodes, int edges) {
+    public Universe(ArrayList<Star> universe, ArrayList<ArrayList<Star>> adjancyList, int nodes, int edges) {
         this.universe = universe;
         this.adjancyList = adjancyList;
         this.nodes = nodes;
@@ -29,11 +35,11 @@ public class Universe {
 
 
     public long getId() {
-        return this.Id;
+        return this.id;
     }
 
-    public void setId(long Id) {
-        this.Id = Id;
+    public void setId(long id) {
+        this.id = id;
     }
 
 
@@ -45,11 +51,11 @@ public class Universe {
         this.universe = universe;
     }
 
-    public ArrayList<ArrayList<Integer>> getAdjancyList() {
+    public ArrayList<ArrayList<Star>> getAdjancyList() {
         return this.adjancyList;
     }
 
-    public void setAdjancyList(ArrayList<ArrayList<Integer>> adjancyList) {
+    public void setAdjancyList(ArrayList<ArrayList<Star>> adjancyList) {
         this.adjancyList = adjancyList;
     }
 

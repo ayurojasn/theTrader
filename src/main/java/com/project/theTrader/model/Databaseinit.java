@@ -1,5 +1,8 @@
 package com.project.theTrader.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.project.theTrader.crew.Crew;
@@ -18,6 +21,8 @@ import com.project.theTrader.spacecraft.Spacecraft;
 import com.project.theTrader.spacecraft.SpacecraftRepository;
 import com.project.theTrader.star.Star;
 import com.project.theTrader.star.StarRepository;
+import com.project.theTrader.universe.Universe;
+import com.project.theTrader.universe.UniverseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -50,6 +55,9 @@ public class Databaseinit implements ApplicationRunner{
 
     @Autowired
     ProductCrewRepository productCrewRepository;
+
+    @Autowired
+    UniverseRepository universeRepository;
 
     @Override
     @Transactional
@@ -84,6 +92,8 @@ public class Databaseinit implements ApplicationRunner{
         // Star
         Star star1 = new Star("star1", 1, 1, 1, true);
         Star star2 = new Star("star2", 5, 20, 15, true);
+        Star star3 = new Star("star3", 8, 2, 15, true);
+        Star star4 = new Star("star4", 3, 10, 7, true);
     
         spacecraftRepository.save(craft1);
         spacecraftRepository.save(craft2);
@@ -136,7 +146,42 @@ public class Databaseinit implements ApplicationRunner{
         //Save in each repository
         starRepository.save(star1);
         starRepository.save(star2);
+        starRepository.save(star3);
+        starRepository.save(star4);
 
+        ArrayList<Star> lists = new ArrayList<>();
+        lists.add(star1);
+        lists.add(star2);
+        lists.add(star3);
+        lists.add(star4);
+
+        ArrayList<ArrayList<Star>> universeStars = new ArrayList<ArrayList<Star>>();
+
+        ArrayList<Star> star1List = new ArrayList<>();
+        star1List.add(star2);
+        star1List.add(star3);
+
+        ArrayList<Star> star2List = new ArrayList<>();
+        star2List.add(star1);
+        star2List.add(star3);
+
+        ArrayList<Star> star3List = new ArrayList<>();
+        star3List.add(star1);
+        star3List.add(star2);
+        star3List.add(star4);
+
+        ArrayList<Star> star4List = new ArrayList<>();
+        star4List.add(star3);
+
+        universeStars.add(star1List);
+        universeStars.add(star2List);
+        universeStars.add(star3List);
+        universeStars.add(star4List);
+
+        Universe universe = new Universe(lists, universeStars, 4, 4);
+
+        universeRepository.save(universe);
+        
         planetRepository.save(planet1);
         planetRepository.save(planet2);
         planetRepository.save(planet3);
@@ -147,11 +192,6 @@ public class Databaseinit implements ApplicationRunner{
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
-
-
-
-
-
 
         
     }
