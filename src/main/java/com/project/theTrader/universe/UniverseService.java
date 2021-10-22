@@ -20,5 +20,4 @@ public class UniverseService {
         universeRepository.findAll().forEach(star -> stars.add(star));  
         return stars;  
     }
-    
 }

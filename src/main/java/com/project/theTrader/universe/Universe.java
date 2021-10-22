@@ -1,22 +1,34 @@
 package com.project.theTrader.universe;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.theTrader.star.Star;
 
 @Entity
 public class Universe {
    
+
     @Id
     @GeneratedValue
     private long id;
-    private ArrayList<Star> universe = new ArrayList<>(); 
+    
+    @OneToMany(mappedBy = "universe")
+    @JsonManagedReference(value = "star")
+    @JsonIgnoreProperties(value = {"x", "y", "z", "inhabited", "planetList", "spaceStarList", "universe"})
+    private List<Star> stars = new ArrayList<>(); 
     // Dentro de Star, lista de Planetas "ArrayList<Star> -> Star -> ArrayList<Planeta>"
-    private ArrayList<ArrayList<Star>> adjancyList;
+    // @JsonIgnore
+   // private ArrayList<ArrayList<Star>> adjancyList;
     // La infromación del grafo conectado
 
     private int nodes;
@@ -26,9 +38,7 @@ public class Universe {
     public Universe() {
     }
 
-    public Universe(ArrayList<Star> universe, ArrayList<ArrayList<Star>> adjancyList, int nodes, int edges) {
-        this.universe = universe;
-        this.adjancyList = adjancyList;
+    public Universe(int nodes, int edges) {
         this.nodes = nodes;
         this.edges = edges;
     }
@@ -43,21 +53,13 @@ public class Universe {
     }
 
 
-    public ArrayList<Star> getUniverse() {
-        return this.universe;
-    }
+    // public List<Star> getUniverse() {
+    //     return this.stars;
+    // }
 
-    public void setUniverse(ArrayList<Star> universe) {
-        this.universe = universe;
-    }
-
-    public ArrayList<ArrayList<Star>> getAdjancyList() {
-        return this.adjancyList;
-    }
-
-    public void setAdjancyList(ArrayList<ArrayList<Star>> adjancyList) {
-        this.adjancyList = adjancyList;
-    }
+    // public void setUniverse(ArrayList<Star> stars) {
+    //     this.stars = stars;
+    // }
 
     public int getNodes() {
         return this.nodes;
@@ -78,13 +80,14 @@ public class Universe {
     @Override
     public String toString() {
         return "{" +
-            " universe='" + getUniverse() + "'" +
-            ", adjancyList='" + getAdjancyList() + "'" +
+            // " universe='" + getUniverse() + "'" +
             ", nodes='" + getNodes() + "'" +
             ", edges='" + getEdges() + "'" +
             "}";
     }
 
-
-
+    public void addStar(Star star) {
+        stars.add(star);
+        star.setUniverse(this);
+    }
 }

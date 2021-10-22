@@ -7,12 +7,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.theTrader.planet.Planet;
 import com.project.theTrader.spacecraft.Spacecraft;
+import com.project.theTrader.universe.Universe;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class Star {
@@ -33,6 +38,18 @@ public class Star {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "star")
     @JsonManagedReference(value = "spacecraft")
     private List<Spacecraft> spaceStarList = new ArrayList<>();
+
+    @ManyToOne
+    @JsonIgnore
+    private Universe universe;
+
+    public Universe getUniverse() {
+        return this.universe;
+    }
+
+    public void setUniverse(Universe universe) {
+        this.universe = universe;
+    }
 
     public Star() {
     }

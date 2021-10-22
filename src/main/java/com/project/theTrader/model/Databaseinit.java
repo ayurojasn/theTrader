@@ -88,20 +88,25 @@ public class Databaseinit implements ApplicationRunner{
         Planet planet1 = new Planet("Tatooine");
         Planet planet2 = new Planet("Alderaan");
         Planet planet3 = new Planet("Hoth");
+        Planet planet4 = new Planet("Kamino");
+        Planet planet5 = new Planet("Bespin");
+        Planet planet6 = new Planet("Cato Neimoidia");
 
         // Star
-        Star star1 = new Star("star1", 1, 1, 1, true);
-        Star star2 = new Star("star2", 5, 20, 15, true);
-        Star star3 = new Star("star3", 8, 2, 15, true);
-        Star star4 = new Star("star4", 3, 10, 7, true);
-    
+        Star star1 = new Star("Polaris", 1, 1, 1, true);
+        Star star2 = new Star("Sirius", 5, 20, 15, true);
+        Star star3 = new Star("Rigel", 8, 2, 15, true);
+        Star star4 = new Star("Vega", 3, 10, 7, true);
+
         spacecraftRepository.save(craft1);
         spacecraftRepository.save(craft2);
 
         planetRepository.save(planet1);
         planetRepository.save(planet2);
         planetRepository.save(planet3);
-
+        planetRepository.save(planet4);
+        planetRepository.save(planet5);
+        planetRepository.save(planet6);
         
         crewRepository.save(crew1);
         crewRepository.save(crew2);
@@ -116,6 +121,9 @@ public class Databaseinit implements ApplicationRunner{
         star1.addPlanet(planet1);
         star1.addPlanet(planet2);
         star2.addPlanet(planet3);
+        star3.addPlanet(planet4);
+        star3.addPlanet(planet5);
+        star4.addPlanet(planet6);
 
         star1.addSpacecraft(craft1);
         star2.addSpacecraft(craft2);
@@ -148,37 +156,13 @@ public class Databaseinit implements ApplicationRunner{
         starRepository.save(star2);
         starRepository.save(star3);
         starRepository.save(star4);
-
-        ArrayList<Star> lists = new ArrayList<>();
-        lists.add(star1);
-        lists.add(star2);
-        lists.add(star3);
-        lists.add(star4);
-
-        ArrayList<ArrayList<Star>> universeStars = new ArrayList<ArrayList<Star>>();
-
-        ArrayList<Star> star1List = new ArrayList<>();
-        star1List.add(star2);
-        star1List.add(star3);
-
-        ArrayList<Star> star2List = new ArrayList<>();
-        star2List.add(star1);
-        star2List.add(star3);
-
-        ArrayList<Star> star3List = new ArrayList<>();
-        star3List.add(star1);
-        star3List.add(star2);
-        star3List.add(star4);
-
-        ArrayList<Star> star4List = new ArrayList<>();
-        star4List.add(star3);
-
-        universeStars.add(star1List);
-        universeStars.add(star2List);
-        universeStars.add(star3List);
-        universeStars.add(star4List);
-
-        Universe universe = new Universe(lists, universeStars, 4, 4);
+     
+        Universe universe = new Universe(4, 4);
+        
+        universe.addStar(star1);
+        universe.addStar(star2);
+        universe.addStar(star3);
+        universe.addStar(star4);
 
         universeRepository.save(universe);
         
