@@ -30,6 +30,8 @@ public class Star {
     private Integer y;
     private Integer z;
     private boolean inhabited;
+    private int posGrafo;
+
 
     @OneToMany(mappedBy = "star")
     @JsonManagedReference(value = "planetStar")
@@ -43,6 +45,8 @@ public class Star {
     @JsonIgnore
     private Universe universe;
 
+
+    
     public Universe getUniverse() {
         return this.universe;
     }
@@ -54,12 +58,13 @@ public class Star {
     public Star() {
     }
 
-    public Star(String starName, Integer x, Integer y, Integer z, boolean inhabited) {
+    public Star(String starName, Integer x, Integer y, Integer z, boolean inhabited, int posGrafo) {
         this.starName = starName;
         this.x = x;
         this.y = y;
         this.z = z;
         this.inhabited = inhabited;
+        this.posGrafo = posGrafo;
     }
 
     public Long getId() {
@@ -114,6 +119,13 @@ public class Star {
         this.inhabited = inhabited;
     }
 
+    public int getPosGrafo() {
+        return this.posGrafo;
+    }
+
+    public void setPosGrafo(int posGrafo) {
+        this.posGrafo = posGrafo;
+    }
 
     public List<Planet> getPlanetList() {
         return this.planetList;

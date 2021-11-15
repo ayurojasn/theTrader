@@ -24,7 +24,7 @@ public class StarController {
 
     @GetMapping("/star/{starid}") // R -> ById
     @CrossOrigin(origins = "http://localhost:4200")
-    private Star getPlayer(@PathVariable("starid") Long starid) {
+    private Star getStarById(@PathVariable("starid") Long starid) {
         return starService.getStarById(starid);
     }
 

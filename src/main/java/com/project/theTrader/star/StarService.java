@@ -23,4 +23,5 @@ public class StarService {
     public Star getStarById(Long starid) {
         return starRepository.findById(starid).get();
     }
+
 }

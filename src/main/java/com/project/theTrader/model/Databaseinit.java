@@ -93,10 +93,21 @@ public class Databaseinit implements ApplicationRunner{
         Planet planet6 = new Planet("Cato Neimoidia");
 
         // Star
-        Star star1 = new Star("Polaris", 1, 1, 1, true);
-        Star star2 = new Star("Sirius", 5, 20, 15, true);
-        Star star3 = new Star("Rigel", 8, 2, 15, true);
-        Star star4 = new Star("Vega", 3, 10, 7, true);
+        Star star0 = new Star("Polaris", 1, 1, 1, true, 0);
+        Star star1 = new Star("Sirius", 5, 20, 15, true, 1);
+        Star star2 = new Star("Rigel", 8, 2, 15, true, 2);
+        Star star3 = new Star("Vega", 3, 10, 7, true, 3);
+        Star star4 = new Star("Pleiades", 3, 10, 7, true, 4);
+        Star star5 = new Star("Antares", 3, 10, 7, true, 5);
+        Star star6 = new Star("Canopus", 3, 10, 7, true, 6);
+        Star star7 = new Star("Altair", 3, 10, 7, true, 7);
+        Star star8 = new Star("Aldebaran", 3, 10, 7, true, 8);
+        Star star9 = new Star("Spica", 3, 10, 7, true, 9);
+        Star star10 = new Star("Mimosa", 3, 10, 7, true, 10);
+        Star star11 = new Star("Pollux", 3, 10, 7, true, 11);
+        Star star12 = new Star("Deneb", 3, 10, 7, true, 12);
+        Star star13 = new Star("Bellatrix", 3, 10, 7, true, 13);
+        
 
         spacecraftRepository.save(craft1);
         spacecraftRepository.save(craft2);
@@ -125,6 +136,8 @@ public class Databaseinit implements ApplicationRunner{
         star3.addPlanet(planet5);
         star4.addPlanet(planet6);
 
+
+
         star1.addSpacecraft(craft1);
         star2.addSpacecraft(craft2);
 
@@ -152,20 +165,49 @@ public class Databaseinit implements ApplicationRunner{
         crew2.addProduct(product3);
 
         //Save in each repository
+        starRepository.save(star0);
         starRepository.save(star1);
         starRepository.save(star2);
         starRepository.save(star3);
         starRepository.save(star4);
-     
-        Universe universe = new Universe(4, 4);
+        starRepository.save(star5);
+        starRepository.save(star6);
+        starRepository.save(star7);
+        starRepository.save(star8);
+        starRepository.save(star9);
+        starRepository.save(star10);
+        starRepository.save(star11);
+        starRepository.save(star12);
+        starRepository.save(star13);
         
+
+     
+        Universe universe = new Universe(14);
+
+        universe.setNodes(14);
+        
+        universe.addStar(star0);
         universe.addStar(star1);
         universe.addStar(star2);
         universe.addStar(star3);
         universe.addStar(star4);
+        universe.addStar(star5);
+        universe.addStar(star6);
+        universe.addStar(star7);
+        universe.addStar(star8);
+        universe.addStar(star9);
+        universe.addStar(star10);
+        universe.addStar(star11);
+        universe.addStar(star12);
+        universe.addStar(star13);
+
+        // universe.addEdgesStars();
+
 
         universeRepository.save(universe);
         
+        // universe.addEdgesStars();
+
         planetRepository.save(planet1);
         planetRepository.save(planet2);
         planetRepository.save(planet3);
@@ -177,7 +219,6 @@ public class Databaseinit implements ApplicationRunner{
         productRepository.save(product2);
         productRepository.save(product3);
 
-        
     }
     
 }
