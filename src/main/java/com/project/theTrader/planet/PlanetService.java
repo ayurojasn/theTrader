@@ -3,6 +3,8 @@ package com.project.theTrader.planet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.theTrader.productPlanet.ProductPlanet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ public class PlanetService {
     return planets;  
     }
 
-    public Planet getPlayerById(Long planetid) {
+    public Planet getPlanetById(Long planetid) {
         return planetRepository.findById(planetid).get();
     }
 
@@ -33,4 +35,12 @@ public class PlanetService {
         planetRepository.save(planet);
     }
 
+    public List<ProductPlanet> getProductPlanet(Long planetid){
+        List<ProductPlanet> productPlanetList = new ArrayList<>();
+        Planet planet = new Planet();
+        planet = getPlanetById(planetid);
+        productPlanetList = planet.getProductList();
+
+        return productPlanetList;
+    }
 }

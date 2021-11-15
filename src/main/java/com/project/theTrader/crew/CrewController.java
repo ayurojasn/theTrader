@@ -2,8 +2,11 @@ package com.project.theTrader.crew;
 
 import java.util.List;
 
+import com.project.theTrader.productCrew.ProductCrew;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +35,7 @@ public class CrewController {
 
     @GetMapping("/crew/{crewid}") // R -> ById
     private Crew getCrew(@PathVariable("crewid") Long crewid) {
-        return crewService.getPlayerById(crewid);
+        return crewService.getCrewById(crewid);
     }
 
     @PutMapping("/crew") // U
@@ -45,4 +48,16 @@ public class CrewController {
     private void deleteCrew(@PathVariable("crewid") Long crewid) {
         crewService.delete(crewid);
     }
+
+    @PutMapping("crewPlayerTime/{crewid}/{time}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void updateTimeCrew(@PathVariable("crewid") Long crewid, @PathVariable("time") Integer time){
+        crewService.updateTimeCrew(crewid, time);
+    }
+
+    @GetMapping("/productCrew/{crewid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private List<ProductCrew> getProductCrew(@PathVariable("crewid") Long crewid){
+        return crewService.getProductCrew(crewid);
+    } 
 }

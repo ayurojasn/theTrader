@@ -3,6 +3,8 @@ package com.project.theTrader.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.theTrader.crew.Crew;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,4 +38,15 @@ public class PlayerService {
     public void update(Player player, Long playerid) {
         playerRepository.save(player);
     }  
+
+    public Long getCrewPlayer(Long playerid){
+        Long crewId;
+        Crew crew = new Crew();
+        Player playerCrew = new Player();
+        playerCrew = getPlayerById(playerid);
+        crew = playerCrew.getCrew();
+        crewId = crew.getId();
+
+        return crewId;
+    }
 }

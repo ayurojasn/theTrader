@@ -3,6 +3,8 @@ package com.project.theTrader.player;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.project.theTrader.crew.Crew;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +60,12 @@ public class PlayerController {
     private void deletePlayer(@PathVariable("playerid") Long playerid) {
         playerService.delete(playerid);
     }
+
+    @GetMapping("crewPlayer/{playerid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private Long getCrewPlayer(@PathVariable("playerid") Long playerid){
+        return playerService.getCrewPlayer(playerid);
+    }
+
 
 }

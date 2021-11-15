@@ -43,6 +43,12 @@ public class Crew {
     @JsonIgnore
     @JsonManagedReference(value = "productCrew")
     private List<ProductCrew> productCrewList = new ArrayList<>();
+
+    @JsonIgnore
+    public List<ProductCrew> getProductCrewList(){
+        return this.productCrewList;
+    }
+
     
     public Crew() {
     }
@@ -101,15 +107,6 @@ public class Crew {
     public void setPlayerList(List<Player> playerList) {
         this.playerList = playerList;
     }
-
-
-    // public ArrayList<Product> getProductList() {
-    //     return this.productList;
-    // }
-
-    // public void setProductList(ArrayList<Product> productList) {
-    //     this.productList = productList;
-    // }
 
 
     @Override

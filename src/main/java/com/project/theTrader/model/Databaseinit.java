@@ -75,8 +75,8 @@ public class Databaseinit implements ApplicationRunner{
         Crew crew2 = new Crew("Empire", 250, 20);  
 
         // Spacecraft
-        Spacecraft craft1 = new Spacecraft("X-wings", 200, 30);
-        Spacecraft craft2 = new Spacecraft("Tie fighters", 400, 50);
+        Spacecraft craft1 = new Spacecraft("X-wings", 200, 100);
+        Spacecraft craft2 = new Spacecraft("Tie fighters", 400, 120);
         // Spacecraft craft3 = new Spacecraft("Delta 7", 400, 50);
 
         // Product 
@@ -148,9 +148,9 @@ public class Databaseinit implements ApplicationRunner{
         planet3.addProduct(product3); //Droide3-7
 
         // Add each player in crew
-        crew1.addPlayer(p1);
         crew1.addPlayer(p2);
-        crew2.addPlayer(p3); 
+        crew1.addPlayer(p3);
+        crew2.addPlayer(p1); 
 
         // Set spacecraft in crew
         crew1.setSpacecraft(craft1);

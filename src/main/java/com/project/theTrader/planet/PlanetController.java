@@ -38,7 +38,7 @@ public class PlanetController {
     @GetMapping("/planet/{planetid}") // R -> ById
     @CrossOrigin(origins = "http://localhost:4200")
     private Planet getPlanet(@PathVariable("planetid") Long planetid) {
-        return planetService.getPlayerById(planetid);
+        return planetService.getPlanetById(planetid);
     }
 
     @PutMapping("/planet") // U
@@ -46,5 +46,11 @@ public class PlanetController {
         planetService.update(planet, planetid);
         return planet;
     }
+
+    @GetMapping("/productPlanet/{planetid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private List<ProductPlanet> getProductPlanet(@PathVariable("planetid") Long planetid){
+        return planetService.getProductPlanet(planetid);
+    } 
 
 }
