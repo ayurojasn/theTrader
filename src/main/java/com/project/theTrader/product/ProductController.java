@@ -48,4 +48,11 @@ public class ProductController {
     private void deleteProduct(@PathVariable("productid") Long productid) {
         productService.delete(productid);
     }
+
+    
+    @GetMapping("creditsProduct/{productid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private double getCreditsProduct(@PathVariable("productid") Long productid){
+        return productService.getCreditsProduct(productid);
+    }
 }

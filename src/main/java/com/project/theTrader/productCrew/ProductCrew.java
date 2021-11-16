@@ -16,10 +16,10 @@ public class ProductCrew {
     @GeneratedValue
     private Long id;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Product product;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Crew crew;
 
     public ProductCrew() {

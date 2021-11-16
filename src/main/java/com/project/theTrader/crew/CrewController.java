@@ -34,6 +34,7 @@ public class CrewController {
     }
 
     @GetMapping("/crew/{crewid}") // R -> ById
+    @CrossOrigin(origins = "http://localhost:4200")
     private Crew getCrew(@PathVariable("crewid") Long crewid) {
         return crewService.getCrewById(crewid);
     }
@@ -60,4 +61,36 @@ public class CrewController {
     private List<ProductCrew> getProductCrew(@PathVariable("crewid") Long crewid){
         return crewService.getProductCrew(crewid);
     } 
+
+    @PutMapping("addProductCrew/{crewid}/{productid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void addProductCrew(@PathVariable("crewid") Long crewid, @PathVariable("productid") Long productid){
+        crewService.addProductCrew(crewid, productid);
+    }
+
+    @GetMapping("credits/{crewid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private double getCredits(@PathVariable("crewid") Long crewid){
+        return crewService.getCredits(crewid);
+    }
+
+    @PutMapping("updateCreditsCompra/{crewid}/{credits}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void updateCreditsCompra(@PathVariable("crewid") Long crewid, @PathVariable("credits") Long credits){
+        crewService.updateCreditsCompra(crewid, credits);
+    }
+
+    
+    @PutMapping("updateCreditsVenta/{crewid}/{credits}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void updateCreditsVenta(@PathVariable("crewid") Long crewid, @PathVariable("credits") Long credits){
+        crewService.updateCreditsVenta(crewid, credits);
+    }
+
+    @PutMapping("/removeProductCrew/{crewid}/{productid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void removeProductCreww(@PathVariable("crewid") Long crewid, @PathVariable("productid") Long productid){
+        crewService.removeProductCrew(crewid, productid);
+    }
+
 }

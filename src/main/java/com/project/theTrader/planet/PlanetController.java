@@ -53,4 +53,17 @@ public class PlanetController {
         return planetService.getProductPlanet(planetid);
     } 
 
+    @PutMapping("/removeProductPlanet/{planetid}/{productid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void removeProductPlanet(@PathVariable("planetid") Long planetid, @PathVariable("productid") Long productid){
+        planetService.removeProductPlanet(planetid, productid);
+    }
+
+    
+    @PutMapping("addProductPlanet/{planetid}/{productid}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private void addProductPlanet(@PathVariable("planetid") Long planetid, @PathVariable("productid") Long productid){
+        planetService.addProductPlanet(planetid, productid);
+    }
+
 }

@@ -49,6 +49,10 @@ public class Crew {
         return this.productCrewList;
     }
 
+    @JsonIgnore
+    public void setProductCrewList(List<ProductCrew> productCrewList){
+        this.productCrewList = productCrewList;
+    }
     
     public Crew() {
     }

@@ -36,4 +36,13 @@ public class ProductService{
     public void delete(Long productid) { //Arreglar
         productRepository.deleteById(productid);
     }
+
+    public double getCreditsProduct(Long productid){
+        double credits;
+        Product product = new Product();
+        product = getProductById(productid);
+        credits = product.getPc();
+
+        return credits;
+    }
 }
