@@ -37,7 +37,7 @@ public class Star {
     @JsonManagedReference(value = "planetStar")
     private List<Planet> planetList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "star")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "star")
     @JsonManagedReference(value = "spacecraft")
     private List<Spacecraft> spaceStarList = new ArrayList<>();
 
