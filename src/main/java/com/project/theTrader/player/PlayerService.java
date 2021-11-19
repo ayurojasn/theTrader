@@ -49,4 +49,18 @@ public class PlayerService {
 
         return crewId;
     }
+
+    public Player getPlayerByName(String playername){
+        Player player = new Player();
+        List<Player> players = new ArrayList<Player>(); 
+        players = getAllPlayers();
+
+        for(int i = 0; i<players.size(); i++){
+            if((players.get(i).getUserName()).contentEquals(playername)){
+                player = getPlayerById(players.get(i).getId());
+            }
+        }
+
+        return player;
+    }
 }

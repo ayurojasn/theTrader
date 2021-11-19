@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,39 +33,54 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
+  
+    // @PreAuthorize("hasRole('ROLE_CAPTAIN') or hasRole('ROLE_PILOT') or hasRole('ROLE_TRADER')")
     @PostMapping(value="/player", consumes={"application/json"}) // C
     private Long createPlayer(@RequestBody Player player) {
         playerService.create(player);
         return player.getId();
     }
 
+   
     @GetMapping("/players") // R -> All
     @CrossOrigin(origins = "http://localhost:4200")
     private List<Player> getAllPlayers() {
         return playerService.getAllPlayers();
     }
 
+   
     @GetMapping("/player/{playerid}") // R -> ById
     @CrossOrigin(origins = "http://localhost:4200")
     private Player getPlayer(@PathVariable("playerid") Long playerid) {
         return playerService.getPlayerById(playerid);
     }
 
+    // @PreAuthorize("hasRole('ROLE_CAPTAIN') or hasRole('ROLE_PILOT') or hasRole('ROLE_TRADER')")
     @PutMapping("/player") // U
     private Player updatePlayer(@RequestBody Player player, Long playerid) {
         playerService.update(player, playerid);
         return player;
     }
 
+    // @PreAuthorize("hasRole('ROLE_CAPTAIN') or hasRole('ROLE_PILOT') or hasRole('ROLE_TRADER')")
     @DeleteMapping("/player/{playerid}") // D
     private void deletePlayer(@PathVariable("playerid") Long playerid) {
         playerService.delete(playerid);
     }
 
+    
+    
     @GetMapping("crewPlayer/{playerid}")
     @CrossOrigin(origins = "http://localhost:4200")
     private Long getCrewPlayer(@PathVariable("playerid") Long playerid){
         return playerService.getCrewPlayer(playerid);
+    }
+
+    
+    @GetMapping("playerName/{playername}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    private Player getPlayerByName(@PathVariable("playername") String playername){
+        return playerService.getPlayerByName(playername);
     }
 
 }

@@ -3,6 +3,7 @@ package com.project.theTrader.star;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,14 @@ public class StarController {
     @Autowired
     StarService starService;
 
+    
     @GetMapping("/stars")
     @CrossOrigin(origins = "http://localhost:4200")
     private List<Star> getAll(){
         return starService.getAll();
     }
 
+    
     @GetMapping("/star/{starid}") // R -> ById
     @CrossOrigin(origins = "http://localhost:4200")
     private Star getStarById(@PathVariable("starid") Long starid) {

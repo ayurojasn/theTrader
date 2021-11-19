@@ -16,7 +16,8 @@ public class Player {
     @Id
     @GeneratedValue
     private Long id;
-    private String playerName;
+    private String username;
+    private String password;
     private String role;
 
     @ManyToOne  
@@ -26,8 +27,9 @@ public class Player {
     public Player() {
     }
 
-    public Player(String playerName, String role) {
-        this.playerName = playerName;
+    public Player(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
         this.role = role;
     }
 
@@ -39,12 +41,20 @@ public class Player {
         this.id = id;
     }
 
-    public String getPlayerName() {
-        return this.playerName;
+    public String getUserName() {
+        return this.username;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setPlayerName(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
@@ -67,11 +77,9 @@ public class Player {
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", playerName='" + getPlayerName() + "'" +
+            ", playerName='" + getUserName() + "'" +
             ", role='" + getRole() + "'" +
             "}";
     }
-
-
 
 }

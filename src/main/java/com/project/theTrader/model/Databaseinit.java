@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Component
 public class Databaseinit implements ApplicationRunner{
@@ -59,6 +60,9 @@ public class Databaseinit implements ApplicationRunner{
     @Autowired
     UniverseRepository universeRepository;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
@@ -66,9 +70,9 @@ public class Databaseinit implements ApplicationRunner{
         // Creando datos para la base de datos
 
         // Player
-        Player p1 = new Player("Obi-Wan", "Captain");
-        Player p2 = new Player("Luke", "Pilot");
-        Player p3 = new Player("Darth", "Trader");
+        Player p1 = new Player("Obi-Wan", encoder.encode("123"), "ROLE_CAPTAIN");
+        Player p2 = new Player("Luke",encoder.encode("123"),  "ROLE_PILOT");
+        Player p3 = new Player("Darth",encoder.encode("123"), "ROLE_TRADER");
 
         // Crew
         Crew crew1 = new Crew("Jedis", 100, 40);

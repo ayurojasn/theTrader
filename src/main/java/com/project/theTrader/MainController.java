@@ -12,21 +12,5 @@ public class MainController {
         return "home";
     }
 
-    // Add only views to reference 
-
-    // @GetMapping("/player")
-    // public String getPlayerPage() {
-    //     return "player";
-    // }
-
-    @GetMapping("/crew")
-    public String getCrewPage() {
-        return "crew";
-    }
-
-    @GetMapping("/spacecraft")
-    public String getSpacecraftPage() {
-        return "spacecraft";
-    }
 }
 
